@@ -3,4 +3,5 @@ type RootStackParamList = {
     article: Article;
   };
   Home: undefined;
+  Profile: undefined;
 };

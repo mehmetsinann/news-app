@@ -4,7 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import NewsDetail from "../screens/NewsDetail";
 import Profile from "../screens/Profile";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (
