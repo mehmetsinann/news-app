@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackIcon, UserIcon } from '../constants/icons';
+import { LeftArrowIcon, RightArrowIcon, UserIcon } from '../constants/icons';
 
 interface IconProps {
   name: string;
@@ -8,7 +8,8 @@ interface IconProps {
 export const Icon:React.FC<IconProps> = ({name}) => {
   const choosedIcon = () => {
     if(name==='user') return <UserIcon />
-    else if(name==='back') return <BackIcon />
+    else if(name==='left_arrow') return <LeftArrowIcon />
+    else if(name==='right_arrow') return <RightArrowIcon />
     return null;
   };
 

@@ -17,14 +17,13 @@ interface NewsDetailProps {
 }
 
 const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
-  console.log(navigation, route)
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
   }
 
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
-    icon: 'back'
+    icon: 'left_arrow'
   };
   return (
     <View>

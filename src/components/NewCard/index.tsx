@@ -3,12 +3,12 @@ import { Text, TouchableWithoutFeedback, View } from "react-native";
 
 import { styles } from "./styles";
 
-interface TopHeadlineCardProps {
+interface NewCardProps {
   article: Article;
   onPress: () => void;
 }
 
-export const TopHeadlineCard:React.FC<TopHeadlineCardProps> = ({ article, onPress }) => {
+export const NewCard:React.FC<NewCardProps> = React.memo(({ article, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
@@ -17,4 +17,4 @@ export const TopHeadlineCard:React.FC<TopHeadlineCardProps> = ({ article, onPres
       </View>
     </TouchableWithoutFeedback>
   )
-};
+});

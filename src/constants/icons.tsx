@@ -4,6 +4,10 @@ export const UserIcon = () => {
   return <AntDesign name="user" size={24} color="white" />
 }
 
-export const BackIcon = () => {
+export const LeftArrowIcon = () => {
   return <AntDesign name="left" size={24} color="white" />
+}
+
+export const RightArrowIcon = () => {
+  return <AntDesign name="right" size={24} color="white" />
 }

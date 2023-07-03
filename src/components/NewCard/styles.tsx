@@ -4,11 +4,13 @@ import { backgroundColor, secondaryColor } from "../../constants/appColors";
 
 export const styles = StyleSheet.create({
   container: {
-    width: screenWidth * 0.4,
+    width: screenWidth - 80,
     height: screenHeight * 0.2,
     backgroundColor: backgroundColor,
     borderRadius: 8,
-    padding: 8
+    padding: 8,
+    alignSelf:'center',
+    marginVertical: 8
   },
   articleTitle: {
     fontSize: 18,

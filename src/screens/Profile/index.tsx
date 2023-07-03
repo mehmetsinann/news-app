@@ -1,8 +1,13 @@
 import { Text, View } from "react-native"
 import { HeaderBar } from "../../components/HeaderBar"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Profile"
+>;
 interface ProfileProps {
-  navigation: any;
+  navigation: HomeScreenNavigationProp;
 }
 
 const Profile: React.FC<ProfileProps> = ({ navigation }) => {
@@ -12,13 +17,13 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
-    icon: 'back'
+    icon: 'left_arrow'
   }
 
   return(
     <View>
       <HeaderBar title={"Profile"} leftButton={headerLeftButton} />
-      <Text>Profile</Text>
+      <Text>Profile Screen</Text>
     </View>
   )
 }
