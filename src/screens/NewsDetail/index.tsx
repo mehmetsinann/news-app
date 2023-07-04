@@ -21,17 +21,18 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
     navigation.goBack();
   }
 
+  console.log(route)
+
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
     icon: 'left_arrow'
   };
   return (
     <View>
-      <HeaderBar title={"Detail"} leftButton={headerLeftButton} />
-      <Text>NewsDetail Screen</Text>
-      <Text>{route.params.article.title}</Text>
+      <HeaderBar title={route.params.article.title} leftButton={headerLeftButton} />
       <Text>{route.params.article.description}</Text>
       <Text>{route.params.article.url}</Text>
+      <Text>{route.params.article.content}</Text>
     </View>
   );
 };

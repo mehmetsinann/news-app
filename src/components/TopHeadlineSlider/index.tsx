@@ -32,7 +32,7 @@ export const TopHeadlineSlider: React.FC<TopHeadlineSliderProps> = ({ articles, 
           ({item, index}) => renderItem(item, index)
         }
         sliderWidth={screenWidth}
-        itemWidth={screenWidth-80}
+        itemWidth={screenWidth-40}
       />
     </View>
   )

@@ -2,15 +2,18 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Navigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
-
-// News API Key: 44153d692eda497496f8eb010a2de0a6
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Navigation />
-      <StatusBar style="light" />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+        <StatusBar style="light" />
+      </NavigationContainer>
+    </Provider>
+    
   );
 }
 

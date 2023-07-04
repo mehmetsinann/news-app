@@ -4,4 +4,7 @@ type RootStackParamList = {
   };
   Home: undefined;
   Profile: undefined;
+  Modal: {
+    article: Article;
+  };
 };

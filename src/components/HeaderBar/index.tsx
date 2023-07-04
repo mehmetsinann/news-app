@@ -1,8 +1,10 @@
 import React from "react";
 import { SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 
-import { styles } from "./styles"
 import { Icon } from "../Icon";
+import { secondaryColor } from "../../constants/appColors";
+
+import { styles } from "./styles"
 
 interface Button{
   onPress?: () => void;
@@ -13,11 +15,12 @@ interface HeaderBarProps {
   title: string;
   leftButton?: Button;
   rightButton?: Button;
+  backgroundColor?: string;
 }
 
-export const HeaderBar: React.FC<HeaderBarProps> = ({title, leftButton, rightButton}) => {
+export const HeaderBar: React.FC<HeaderBarProps> = ({title, leftButton, rightButton, backgroundColor = secondaryColor}) => {
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={[styles.container, {backgroundColor}]}>
       <View style={styles.headerButton}>
         {leftButton && (
           <TouchableOpacity onPress={leftButton.onPress}>
@@ -28,7 +31,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({title, leftButton, rightBut
         )}
       </View>
 
-      <Text style={styles.headerTitle}>{title}</Text>
+      <Text style={[styles.headerTitle]}>{title}</Text>
       
       <View style={styles.headerButton}>
         {rightButton && (

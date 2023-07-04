@@ -14,11 +14,13 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     color:'white',
-    fontSize: 24,
     fontWeight: "500",
-    paddingBottom: 12
+    maxWidth: "80%",
+    textAlign: "center",
+    fontSize: 20
   },
   headerButton: {
+    maxWidth: "10%",
     width: 40,
     height: 40,
     marginHorizontal: 8,
