@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "500",
     color: "black",
-    marginVertical: 8
+    marginVertical: 4
   },
   articleDescription: {
     fontSize: 16,
@@ -37,4 +37,8 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
+  publishDate: {
+    fontSize: 14,
+    color: "gray",
+  }
 });

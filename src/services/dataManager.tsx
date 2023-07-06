@@ -3,10 +3,10 @@
 import axios from "axios";
 import { headlineNewsEndpoint, newsEndpoint } from "../constants/apiEndpoints";
 
-export const getNews: () => Promise<Article[]> = async () => {
+export const getNews: (page:string) => Promise<Article[]> = async (page) => {
   const news: Article[] = [];
   try {
-    await axios.get(`${newsEndpoint}`).then((response) => {
+    await axios.get(`${newsEndpoint}&page=${page}`).then((response) => {
       news.push(...response.data.articles);
     })
   } catch (error) {

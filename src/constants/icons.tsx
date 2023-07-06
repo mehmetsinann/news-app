@@ -11,3 +11,7 @@ export const LeftArrowIcon = () => {
 export const RightArrowIcon = () => {
   return <AntDesign name="right" size={24} color="white" />
 }
+
+export const UpArrowIcon = () => {
+  return <AntDesign name="up" size={24} color="white" />
+}
