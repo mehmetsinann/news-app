@@ -25,8 +25,8 @@ const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
   const [topHeadlineNews, setTopHeadlineNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>("1");
-  const scrollViewRef = React.useRef<ScrollView>(null); // ScrollView'e referans oluşturmak için useRef kullanılıyor
-  const [showScrollToTop, setShowScrollToTop] = useState(false); // Başa dön butonunun görünürlüğünü yönetmek için useState kullanılıyor
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const scrollViewRef = React.useRef<ScrollView>(null);
 
   const handleScroll = (event:any) => {
     const offsetY = event.nativeEvent.contentOffset.y;

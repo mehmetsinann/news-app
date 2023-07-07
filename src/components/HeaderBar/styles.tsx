@@ -20,9 +20,8 @@ export const styles = StyleSheet.create({
     fontSize: 20
   },
   headerButton: {
-    maxWidth: "10%",
-    width: 40,
-    height: 40,
+    width: 24,
+    height: 24,
     marginHorizontal: 8,
     justifyContent:'center',
     alignItems:'center'
