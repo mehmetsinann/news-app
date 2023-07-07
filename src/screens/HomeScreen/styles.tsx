@@ -13,5 +13,10 @@ export const styles = StyleSheet.create({
     backgroundColor:'black',
     borderRadius: 100,
     opacity: 0.7
-  }
+  },
+  title: {
+    marginLeft: 16,
+    fontSize: 20,
+    marginTop: 12
+  },
 });

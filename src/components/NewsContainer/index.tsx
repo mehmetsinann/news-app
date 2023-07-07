@@ -31,7 +31,6 @@ export const NewsContainer: React.FC<NewsContainerProps> = ({ articles, onPressI
   };
   return (
     <View>
-      <Text style={styles.title}>News</Text>
       {articles.map((article:Article, index:number) => (
           <NewCard article={article} key={index} onPress={() => {onPressItem(article)}} />
         )

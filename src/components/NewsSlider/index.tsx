@@ -13,7 +13,7 @@ interface TopHeadlineSliderProps {
   onPressItem: (item: Article) => void;
 }
 
-export const TopHeadlineSlider: React.FC<TopHeadlineSliderProps> = ({ articles, onPressItem }) => {
+export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({ articles, onPressItem }) => {
   const carouselRef = React.useRef(null);
 
   const renderItem: (item: Article, index: number) => JSX.Element = (item:Article,index:number) => {
@@ -24,7 +24,6 @@ export const TopHeadlineSlider: React.FC<TopHeadlineSliderProps> = ({ articles, 
 
   return(
     <View style={styles.container}>
-      <Text style={styles.title}>Headline News</Text>
       <Carousel
         ref={carouselRef}
         data={articles}

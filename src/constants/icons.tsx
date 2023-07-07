@@ -20,3 +20,9 @@ export const SaveIcon = () => {
   return <AntDesign name="save" size={24} color="white" />
 }
 
+export const LoginIcon = () => {
+  return <AntDesign name="login" size={24} color="white" />
+}
+
+
+

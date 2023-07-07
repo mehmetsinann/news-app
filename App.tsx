@@ -3,13 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import Navigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
+import store from './src/redux/store';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Navigation />
-      <StatusBar style="light" />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+        <StatusBar style="light" />
+      </NavigationContainer>
+    </Provider>
+    
   );
 }
 

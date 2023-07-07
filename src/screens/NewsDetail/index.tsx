@@ -5,6 +5,8 @@ import { RouteProp } from "@react-navigation/native";
 import {styles} from "./styles";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import moment from "moment";
+import { RootState } from "../../types/RootState";
+import { useSelector } from "react-redux";
 
 type DetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -21,6 +23,7 @@ interface NewsDetailProps {
 const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
   const publishDate = moment(route.params.article.publishedAt).format('DD MMMM YYYY - HH:mm');
   const { title, urlToImage, content, description } = route.params.article;
+  const user = useSelector((state: RootState) => state.user.user);
 
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
@@ -42,11 +45,9 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
     navigation.navigate('Modal', { article: route.params.article });
   }
 
-  console.log(urlToImage)
-  // TODO :: for the save button on the right check if the user is logged in, if not the button should not appear
   return (
     <View>
-      <HeaderBar title={route.params.article.title} leftButton={headerLeftButton} rightButton={headerRightButton} />
+      <HeaderBar title={route.params.article.title} leftButton={headerLeftButton} rightButton={user ? headerRightButton : null} />
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.publishedAt}>{publishDate}</Text>

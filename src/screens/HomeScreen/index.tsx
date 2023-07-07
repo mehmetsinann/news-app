@@ -3,7 +3,7 @@ import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { HeaderBar } from "../../components/HeaderBar";
-import { TopHeadlineSlider } from "../../components/TopHeadlineSlider";
+import { NewsSlider } from "../../components/NewsSlider";
 import { NewsContainer } from "../../components/NewsContainer";
 
 import { getHeadlineNews, getNews } from "../../services/dataManager";
@@ -11,6 +11,10 @@ import { getHeadlineNews, getNews } from "../../services/dataManager";
 import { styles } from "./styles";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 import { Icon } from "../../components/Icon";
+import { useSelector } from "react-redux";
+import { RootState } from "../../types/RootState";
+import { auth } from "../../firebase/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -27,6 +31,8 @@ const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
   const [currentPage, setCurrentPage] = useState<string>("1");
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const scrollViewRef = React.useRef<ScrollView>(null);
+
+  const user = useSelector((state: RootState) => state.user.user);
 
   const handleScroll = (event:any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
@@ -60,12 +66,13 @@ const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
   }, []);
 
   const headerRightButtonOnPress = () => {
-    navigation.navigate("Profile");
+    if(user) navigation.navigate("Profile");
+    else navigation.navigate("Auth");
   };
 
   const headerRightButton = {
     onPress: headerRightButtonOnPress,
-    icon: 'user'
+    icon: user ? 'user' : 'login'
   };
 
   const goToDetail = (article: Article) => {
@@ -75,9 +82,11 @@ const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <HeaderBar title={"Home"} rightButton={headerRightButton} />
-      <ScrollView style={styles.container} ref={scrollViewRef} onScroll={handleScroll}>
-        <TopHeadlineSlider articles={topHeadlineNews} onPressItem={goToDetail} />
-        <View style={{width: "93%", height: 2, backgroundColor: 'lightgrey', marginBottom: 12, alignSelf: 'center' }} />
+      <ScrollView style={styles.container} ref={scrollViewRef} onScroll={handleScroll} scrollEventThrottle={16}>
+        <Text style={styles.title}>Headline News</Text>
+        <NewsSlider articles={topHeadlineNews} onPressItem={goToDetail} />
+        <View style={{width: "93%", height: 2, backgroundColor: 'lightgrey', alignSelf: 'center' }} />
+        <Text style={styles.title}>News</Text>
         <NewsContainer articles={news} onPressItem={goToDetail} loading={loading} getAllNews={getAllNews} />
       </ScrollView>
       {showScrollToTop ? (

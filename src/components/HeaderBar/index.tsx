@@ -13,8 +13,8 @@ interface Button{
 
 interface HeaderBarProps {
   title: string;
-  leftButton?: Button;
-  rightButton?: Button;
+  leftButton?: Button | null;
+  rightButton?: Button | null;
   backgroundColor?: string;
 }
 

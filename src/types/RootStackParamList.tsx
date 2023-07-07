@@ -7,4 +7,5 @@ type RootStackParamList = {
   Modal: {
     article: Article;
   };
+  Auth: undefined;
 };

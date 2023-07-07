@@ -2,11 +2,6 @@ import { StyleSheet } from "react-native";
 import { screenWidth } from "../../constants/screenDimensions";
 
 export const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    marginBottom: 12,
-    marginLeft: 18,
-  },
   footer: {
     padding: 10,
     justifyContent: 'center',
