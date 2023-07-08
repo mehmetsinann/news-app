@@ -18,7 +18,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth:1,
     borderColor:'black',
-    width: screenWidth/2,
+    width: screenWidth-40,
+    height: 50,
   },
   btnText: {
     color: 'black',

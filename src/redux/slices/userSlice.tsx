@@ -14,9 +14,18 @@ const userSlice = createSlice({
     removeUser: (state: Draft<UserState>) => {
       state.user = null;
     },
+    addNewToSavedArticles: (state: Draft<UserState>, action: PayloadAction<Article>) => {
+      state.user?.savedArticles?.push(action.payload);
+    },
+    removeNewFromSavedArticles: (state: Draft<UserState>, action: PayloadAction<Article>) => {
+      state.user?.savedArticles?.splice(
+        state.user?.savedArticles?.findIndex((article) => article.url === action.payload.url) as number,
+        1
+      );
+    },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, addNewToSavedArticles, removeNewFromSavedArticles } = userSlice.actions;
 
 export default userSlice;

@@ -28,13 +28,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
   const [loading, setLoading] = useState<boolean>(false);
-  const [savedNews, setSavedNews] = useState<Article[]>([]);
-
-  useEffect(() => {
-    getSavedNewsData(user?.uid).then((_news: Article[] | undefined) => {
-      _news && setSavedNews(_news);
-    });
-  }, [user]);
+  const savedNews = user?.savedArticles || [];
 
   const headerLeftButtonOnPress = () => {
     navigation.goBack();

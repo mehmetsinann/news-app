@@ -6501,6 +6501,11 @@ react-native-snap-carousel@^3.9.1:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
 
+react-native-toast-message@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-toast-message/-/react-native-toast-message-2.1.6.tgz#322827c66901fa22cb3db614c7383cc717f5bbe2"
+  integrity sha512-VctXuq20vmRa9AE13acaNZhrLcS3FaBS2zEevS3+vhBsnVZYG0FIlWIis9tVnpnNxUb3ART+BWtwQjzSttXTng==
+
 react-native-webview@11.26.0:
   version "11.26.0"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.26.0.tgz#e524992876fe4a79e69905f0fab8949b470e9f16"

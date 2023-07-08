@@ -1,5 +1,5 @@
 import React from 'react';
-import { LeftArrowIcon, LoginIcon, RightArrowIcon, SaveIcon, UpArrowIcon, UserIcon } from '../constants/icons';
+import { DeleteIcon, LeftArrowIcon, LoginIcon, RightArrowIcon, SaveIcon, UpArrowIcon, UserIcon } from '../constants/icons';
 
 interface IconProps {
   name: string;
@@ -13,6 +13,7 @@ export const Icon:React.FC<IconProps> = ({name}) => {
     else if(name==='up_arrow') return <UpArrowIcon />
     else if(name==="save") return <SaveIcon />
     else if(name==="login") return <LoginIcon />
+    else if(name==="delete") return <DeleteIcon />
     return null;
   };
 

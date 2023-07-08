@@ -24,5 +24,9 @@ export const LoginIcon = () => {
   return <AntDesign name="login" size={24} color="white" />
 }
 
+export const DeleteIcon = () => {
+  return <AntDesign name="delete" size={24} color="white" />
+}
+
 
 

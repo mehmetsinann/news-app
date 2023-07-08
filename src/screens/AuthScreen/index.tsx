@@ -7,6 +7,7 @@ import { addUserToFirestore, login, register } from "../../firebase/authMethods"
 import { setUser } from "../../redux/slices/userSlice";
 
 import { styles } from "./styles";
+import { getSavedNewsData } from "../../firebase/newsMethods";
 
 interface AuthScreenProps {
   navigation: any;
@@ -26,11 +27,16 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
   const handleSubmit = async () => {
     setLoading(true);
     if(isLogin) {
-      await login(email, password).then((user) => {
+      await login(email, password).then(async (user) => {
+        let savedNews: Article[] | undefined = [];
+        await getSavedNewsData(user?.uid).then((_news: Article[] | undefined) => {
+          if(_news) savedNews = _news;
+        });
         const userObj: UserState["user"] = {
           uid: user?.uid,
           displayName: user?.displayName,
           email: user?.email,
+          savedArticles: savedNews,
         };
         dispatch(setUser(userObj));
         navigation.reset({
@@ -44,6 +50,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
           uid: user?.uid,
           displayName: user?.displayName,
           email: user?.email,
+          savedArticles: [],
         };
         dispatch(setUser(userObj));
         await addUserToFirestore(userObj);
