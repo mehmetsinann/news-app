@@ -9,13 +9,14 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 import moment from "moment";
 
+import { addNewToSavedArticles, removeNewFromSavedArticles } from "../../redux/slices/userSlice";
+
 import { RootState } from "../../types/RootState";
 import { addNewToSaved, deleteNewFromSaved } from "../../firebase/newsMethods";
 
 import { HeaderBar } from "../../components/HeaderBar";
 
 import {styles} from "./styles";
-import { addNewToSavedArticles, removeNewFromSavedArticles } from "../../redux/slices/userSlice";
 
 type DetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -128,7 +129,6 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
           <Text>Go to New</Text>
         </TouchableOpacity>
       </View>
-      <Toast />
     </View>
   );
 };

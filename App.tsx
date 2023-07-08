@@ -4,6 +4,7 @@ import Navigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <NavigationContainer>
         <Navigation />
         <StatusBar style="light" />
+        <Toast />
       </NavigationContainer>
     </Provider>
     
