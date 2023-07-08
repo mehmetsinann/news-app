@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import { NewCard } from '../NewCard';

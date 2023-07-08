@@ -42,6 +42,9 @@ export const styles = StyleSheet.create({
     marginTop: 12,
     position:'absolute',
     bottom: 32
-
+  },
+  noNews: {
+    fontSize: 14,
+    color: 'grey',
   }
 })

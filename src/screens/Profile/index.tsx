@@ -1,13 +1,20 @@
-import { ActivityIndicator, Button, Text, TouchableOpacity, View } from "react-native"
-import { HeaderBar } from "../../components/HeaderBar"
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { logout } from "../../firebase/authMethods";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../../redux/slices/userSlice";
+
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootState } from "../../types/RootState";
-import { styles } from "./styles";
+
+import { logout } from "../../firebase/authMethods";
+import { getSavedNewsData } from "../../firebase/newsMethods";
+
+import { removeUser } from "../../redux/slices/userSlice";
+
+import { HeaderBar } from "../../components/HeaderBar"
 import { NewsSlider } from "../../components/NewsSlider";
-import { useState } from "react";
+
+import { styles } from "./styles";
+
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -21,6 +28,13 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
   const [loading, setLoading] = useState<boolean>(false);
+  const [savedNews, setSavedNews] = useState<Article[]>([]);
+
+  useEffect(() => {
+    getSavedNewsData(user?.uid).then((_news: Article[] | undefined) => {
+      _news && setSavedNews(_news);
+    });
+  }, [user]);
 
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
@@ -43,60 +57,9 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     setLoading(false);
   };
 
-  const data: Article[] = [
-    {
-      title: 'Title 1',
-      description: 'Description 1',
-      url: 'https://picsum.photos/200/300',
-      urlToImage: 'https://picsum.photos/200/300',
-      publishedAt: '2021-09-01T00:00:00Z',
-      content: 'Content 1',
-      author: 'Author 1',
-      source: {
-        id: '1',
-        name: 'Source 1'
-      }
-    },
-    {
-      title: 'Title 1',
-      description: 'Description 1',
-      url: 'https://picsum.photos/200/300',
-      urlToImage: 'https://picsum.photos/200/300',
-      publishedAt: '2021-09-01T00:00:00Z',
-      content: 'Content 1',
-      author: 'Author 1',
-      source: {
-        id: '1',
-        name: 'Source 1'
-      }
-    },
-    {
-      title: 'Title 1',
-      description: 'Description 1',
-      url: 'https://picsum.photos/200/300',
-      urlToImage: 'https://picsum.photos/200/300',
-      publishedAt: '2021-09-01T00:00:00Z',
-      content: 'Content 1',
-      author: 'Author 1',
-      source: {
-        id: '1',
-        name: 'Source 1'
-      }
-    },
-    {
-      title: 'Title 1',
-      description: 'Description 1',
-      url: 'https://picsum.photos/200/300',
-      urlToImage: 'https://picsum.photos/200/300',
-      publishedAt: '2021-09-01T00:00:00Z',
-      content: 'Content 1',
-      author: 'Author 1',
-      source: {
-        id: '1',
-        name: 'Source 1'
-      }
-    },
-  ]
+  const handleNewsItemPress = (article: Article) => {
+    navigation.navigate('Detail', { article });
+  };
 
   return(
     <View style={styles.container}>
@@ -104,14 +67,15 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
       <Text style={styles.name}>{user?.displayName}</Text>
       <Text style={styles.email}>{user?.email}</Text>
       <View style={styles.newsContainer}>
-        <Text style={styles.newsTitle}>Saved News</Text>
-        <NewsSlider articles={data} onPressItem={() => {}} />
+        <Text style={styles.newsTitle}>Saved News ({savedNews?.length})</Text>
+        {
+          savedNews.length > 0 ? <NewsSlider articles={savedNews} onPressItem={handleNewsItemPress} /> : <Text style={styles.noNews}>There is no saved news</Text>
+        }
       </View>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         {
           loading ? <ActivityIndicator color={'red'} size={"small"} /> : <Text style={{color:'red'}}>Logout</Text>
         }
-        
       </TouchableOpacity>
     </View>
   )

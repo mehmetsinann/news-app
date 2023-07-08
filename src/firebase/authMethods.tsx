@@ -1,9 +1,8 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "./firebaseConfig";
-import { useDispatch } from "react-redux";
-import { setUser } from "../redux/slices/userSlice";
+import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "./firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
-export const register = async (name: string, email:string, password:string) => {
+export const register: (name: string, email: string, password: string) => Promise<User | null | undefined> = async (name: string, email:string, password:string) => {
   try {
     const { user: { uid } } = await createUserWithEmailAndPassword(auth, email, password);
     const user = auth.currentUser;
@@ -18,7 +17,7 @@ export const register = async (name: string, email:string, password:string) => {
   }
 };
 
-export const login = async (email:string, password:string) => {
+export const login: (email: string, password: string) => Promise<User | null | undefined> = async (email:string, password:string) => {
   try {
     const { user: { uid } } = await signInWithEmailAndPassword(auth, email, password);
     const user = auth.currentUser;
@@ -29,10 +28,23 @@ export const login = async (email:string, password:string) => {
   }
 };
 
-export const logout = async () => {
+export const logout: () => Promise<void> = async () => {
   try {
     await auth.signOut();
   } catch (error) {
     console.error("Logout Error:", error);
+  }
+};
+
+export const addUserToFirestore: (userInfo: UserState["user"]) => Promise<void> = async (userInfo: UserState["user"]) => {
+  try {
+    if (userInfo?.uid === null || userInfo?.uid === undefined) {
+      throw new Error("User ID is null or undefined!");
+    } else {
+      await setDoc(doc(db, 'users', userInfo?.uid), userInfo);
+    }
+    console.log('Kullanıcı başarıyla Firestore\'a eklendi!');
+  } catch (error) {
+    console.error('Kullanıcı ekleme hatası:', error);
   }
 };

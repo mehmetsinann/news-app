@@ -1,12 +1,18 @@
 import React from "react";
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { HeaderBar } from "../../components/HeaderBar";
-import { RouteProp } from "@react-navigation/native";
-import {styles} from "./styles";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import moment from "moment";
-import { RootState } from "../../types/RootState";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
+
+import { RouteProp } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+import moment from "moment";
+
+import { RootState } from "../../types/RootState";
+import { addNewToSaved } from "../../firebase/newsMethods";
+
+import { HeaderBar } from "../../components/HeaderBar";
+
+import {styles} from "./styles";
 
 type DetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -34,7 +40,11 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
     icon: 'left_arrow'
   };
 
-  const headerRightButtonOnPress = () => {}
+  const headerRightButtonOnPress = async () => {
+    if(user?.uid) {
+      await addNewToSaved(route.params.article, user?.uid);
+    }
+  };
 
   const headerRightButton = {
     onPress: headerRightButtonOnPress,
@@ -50,7 +60,10 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
       <HeaderBar title={route.params.article.title} leftButton={headerLeftButton} rightButton={user ? headerRightButton : null} />
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.publishedAt}>{publishDate}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.publishedAt}>{publishDate}</Text>
+          <Text style={styles.publishedAt}>{route.params.article.author}</Text>
+        </View>
         <Image style={styles.image} source={{ uri: urlToImage }} />
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.content}>{content.split("[")[0]}</Text>

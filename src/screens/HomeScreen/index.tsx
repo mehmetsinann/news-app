@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../types/RootState";
 
 import { HeaderBar } from "../../components/HeaderBar";
 import { NewsSlider } from "../../components/NewsSlider";
 import { NewsContainer } from "../../components/NewsContainer";
+import { Icon } from "../../components/Icon";
 
 import { getHeadlineNews, getNews } from "../../services/dataManager";
 
 import { styles } from "./styles";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
-import { Icon } from "../../components/Icon";
-import { useSelector } from "react-redux";
-import { RootState } from "../../types/RootState";
-import { auth } from "../../firebase/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

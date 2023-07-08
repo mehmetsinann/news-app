@@ -1,8 +1,9 @@
 import React from "react";
 import { Image, Text, TouchableWithoutFeedback, View } from "react-native";
 
-import { styles } from "./styles";
 import moment from "moment";
+
+import { styles } from "./styles";
 
 interface NewCardProps {
   article: Article;

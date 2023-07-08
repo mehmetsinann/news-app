@@ -1,10 +1,12 @@
-import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, SafeAreaView, Text, TextInput, TouchableOpacity } from "react-native";
-import { styles } from "./styles";
-import { View } from "react-native";
 import React, { useState } from "react";
-import { login, register } from "../../firebase/authMethods";
+import { ActivityIndicator, View, KeyboardAvoidingView, Platform, SafeAreaView, Text, TextInput, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
+
+import { addUserToFirestore, login, register } from "../../firebase/authMethods";
+
 import { setUser } from "../../redux/slices/userSlice";
+
+import { styles } from "./styles";
 
 interface AuthScreenProps {
   navigation: any;
@@ -37,13 +39,14 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
         })
       });
     } else {
-      await register(name, email, password).then((user) => {
+      await register(name, email, password).then(async (user) => {
         const userObj: UserState["user"] = {
           uid: user?.uid,
           displayName: user?.displayName,
           email: user?.email,
         };
         dispatch(setUser(userObj));
+        await addUserToFirestore(userObj);
         navigation.reset({
           index: 0,
           routes: [{ name: 'Home' }],
@@ -111,7 +114,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
         {isLogin ? loginContainer() : registerContainer()}
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           {
-            loading ? <ActivityIndicator size={"small"} color={"green"} /> : <Text style={styles.buttonText}>{isLogin ? 'Register' : 'Login'}</Text>
+            loading ? <ActivityIndicator size={"small"} color={"green"} /> : <Text style={styles.buttonText}>{isLogin ? 'Login' : 'Register'}</Text>
           }
         </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>

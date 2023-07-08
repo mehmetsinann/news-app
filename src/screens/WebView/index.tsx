@@ -1,8 +1,10 @@
-import { RouteProp } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { SafeAreaView } from "react-native";
 import WebView from "react-native-webview";
+
+import { RouteProp } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import { HeaderBar } from "../../components/HeaderBar";
 import { primaryColor } from "../../constants/appColors";
 
