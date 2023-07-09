@@ -9,14 +9,17 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 import moment from "moment";
 
-import { addNewToSavedArticles, removeNewFromSavedArticles } from "../../redux/slices/userSlice";
+import {
+  addNewToSavedArticles,
+  removeNewFromSavedArticles,
+} from "../../redux/slices/userSlice";
 
 import { RootState } from "../../types/RootState";
 import { addNewToSaved, deleteNewFromSaved } from "../../firebase/newsMethods";
 
 import { HeaderBar } from "../../components/HeaderBar";
 
-import {styles} from "./styles";
+import { styles } from "./styles";
 
 type DetailScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -31,7 +34,9 @@ interface NewsDetailProps {
 }
 
 const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
-  const publishDate = moment(route.params.article.publishedAt).format('DD MMMM YYYY - HH:mm');
+  const publishDate = moment(route.params.article.publishedAt).format(
+    "DD MMMM YYYY - HH:mm"
+  );
   const { title, urlToImage, content, description } = route.params.article;
   const user = useSelector((state: RootState) => state.user.user);
   const [isSaved, setIsSaved] = useState<boolean>(false);
@@ -39,69 +44,70 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
 
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
-  }
+  };
 
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
-    icon: 'left_arrow'
+    icon: "left_arrow",
   };
 
   const headerRightButtonOnPress = async () => {
-    if(user?.uid) {
-      !isSaved ? (
-        await addNewToSaved(route.params.article, user?.uid).then(() => {
-          dispatch(addNewToSavedArticles(route.params.article));
-          setIsSaved(true);
-          showSavedToast();
-        })
-      ) : (
-        await deleteNewFromSaved(route.params.article, user?.uid).then(() => {
-          dispatch(removeNewFromSavedArticles(route.params.article));
-          setIsSaved(false);
-          showRemovedToast();
-        })
-      );
-      
+    if (user?.uid) {
+      !isSaved
+        ? await addNewToSaved(route.params.article, user?.uid).then(() => {
+            dispatch(addNewToSavedArticles(route.params.article));
+            setIsSaved(true);
+            showSavedToast();
+          })
+        : await deleteNewFromSaved(route.params.article, user?.uid).then(() => {
+            dispatch(removeNewFromSavedArticles(route.params.article));
+            setIsSaved(false);
+            showRemovedToast();
+          });
     }
   };
 
   const headerRightButton = {
     onPress: headerRightButtonOnPress,
-    icon: isSaved ? 'delete' : 'save'
-  }
+    icon: isSaved ? "delete" : "save",
+  };
 
   const goToNew = () => {
-    navigation.navigate('Modal', { article: route.params.article });
-  }
+    navigation.navigate("Modal", { article: route.params.article });
+  };
+
+  console.log(route.params.article);
 
   const showSavedToast: () => void = () => {
     Toast.show({
-      type: 'success',
-      text1: 'New saved',
-      text2: 'The new has been saved successfully',
+      type: "success",
+      text1: "New saved",
+      text2: "The new has been saved successfully",
       visibilityTime: 2000,
-      position: 'top',
-      topOffset: 60
+      position: "top",
+      topOffset: 60,
     });
-  }
+  };
 
   const showRemovedToast: () => void = () => {
     Toast.show({
-      type: 'error',
-      text1: 'New removed',
-      text2: 'The new has been removed successfully',
+      type: "error",
+      text1: "New removed",
+      text2: "The new has been removed successfully",
       visibilityTime: 2000,
-      position: 'top',
-      topOffset: 60
+      position: "top",
+      topOffset: 60,
     });
   };
 
   const isSavedArticle = () => {
-    if(user?.uid) {
+    if (user?.uid) {
       const savedNews = user?.savedArticles;
-      if(savedNews) {
-        const saved = savedNews.find((article: Article) => article.title === route.params.article.title);
-        if(saved) {
+      if (savedNews) {
+        const saved = savedNews.find(
+          (article: Article) => article.title === route.params.article.title
+        );
+        if (saved) {
           setIsSaved(true);
         }
       }
@@ -110,21 +116,29 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
 
   useEffect(() => {
     isSavedArticle();
-  }, [])
+  }, []);
 
   return (
     <View>
-      <HeaderBar title={route.params.article.title} leftButton={headerLeftButton} rightButton={user ? headerRightButton : null} />
+      <HeaderBar
+        title={route.params.article.title}
+        leftButton={headerLeftButton}
+        rightButton={user ? headerRightButton : null}
+      />
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.publishedAt}>{publishDate}</Text>
-          <Text style={styles.publishedAt}>{route.params.article.author}</Text>
+          <Text style={styles.publishedAt}>
+            {route.params.article.source.name}
+          </Text>
         </View>
         <Image style={styles.image} source={{ uri: urlToImage }} />
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.content}>{content.split("[")[0]}</Text>
-        <Text style={styles.readMore}>Click the 'Go to New' button below to read the rest of the new</Text>
+        <Text style={styles.readMore}>
+          Click the 'Go to New' button below to read the rest of the new
+        </Text>
         <TouchableOpacity onPress={goToNew} style={styles.goToNewButton}>
           <Text>Go to New</Text>
         </TouchableOpacity>
