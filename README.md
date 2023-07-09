@@ -21,32 +21,32 @@ These instructions will help you get a copy of the project up and running on you
 
 1. Clone the repository:
 
-```bash
+```
 git clone https://github.com/mehmetsinann/news-app.git
 ```
 
 2. Navigate to the project directory:
 
-```bash
+```
 cd news-app
 ```
 
 3. Install dependencies:
 
-```bash
+```
 yarn install
 ```
 
 ## Before Starting news-app
-Before running the project, you need to create a `.env` file that contains your Firebase credentials and your News API key. This file will include the secret information that allows the application to access the Firebase server.
+Before running the project, you need to create a `.env` file that contains your Firebase credentials and your News API key. This file will include the secret information that allows the application to access the Firebase server. <br />
 For the News API key you can visit this website: https://newsapi.org
 ### Steps:
 
-1. Create a new file named .env in the project directory.
-2. Open the .env file with a text editor.
+1. Create a new file named `.env` in the project directory.
+2. Open the `.env` file with a text editor.
 3. Add your Firebase credentials and News API key to the file following the format below:
 
-```bash
+```
 API_KEY=api_key
 FIREBASE_API_KEY=firebase_api_key
 FIREBASE_AUTH_DOMAIN=firebase_auth_domain
@@ -64,13 +64,13 @@ After completing these steps, you can start the application and establish a conn
 
 1. Start the development server:
 
-```bash
+```
 yarn start
 ```
 
 2. Open the Expo app(for Android) or the Camera app(for iOS) on your mobile device and scan the QR code displayed in the terminal.
   <br /> Note: Make sure your mobile device is connected to the same network as your development machine.
-3. The app will be loaded on your mobile device, and you can now start using QuickForm.
+3. The app will be loaded on your mobile device, and you can now start using news-app.
 
 ## Built With
 
