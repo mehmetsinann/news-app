@@ -1,10 +1,27 @@
-import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  User,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth, db } from "./firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 
-export const register: (name: string, email: string, password: string) => Promise<User | null | undefined> = async (name: string, email:string, password:string) => {
+export const register: (
+  name: string,
+  email: string,
+  password: string
+) => Promise<User | null | undefined> = async (
+  name: string,
+  email: string,
+  password: string
+) => {
   try {
-    const { user: { uid } } = await createUserWithEmailAndPassword(auth, email, password);
+    const res = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    ).catch((err) => alert(err));
     const user = auth.currentUser;
 
     if (user !== null) {
@@ -17,9 +34,17 @@ export const register: (name: string, email: string, password: string) => Promis
   }
 };
 
-export const login: (email: string, password: string) => Promise<User | null | undefined> = async (email:string, password:string) => {
+export const login: (
+  email: string,
+  password: string
+) => Promise<User | null | undefined> = async (
+  email: string,
+  password: string
+) => {
   try {
-    const { user: { uid } } = await signInWithEmailAndPassword(auth, email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password).catch(
+      (err) => alert(err)
+    );
     const user = auth.currentUser;
 
     return user;
@@ -36,15 +61,17 @@ export const logout: () => Promise<void> = async () => {
   }
 };
 
-export const addUserToFirestore: (userInfo: UserState["user"]) => Promise<void> = async (userInfo: UserState["user"]) => {
+export const addUserToFirestore: (
+  userInfo: UserState["user"]
+) => Promise<void> = async (userInfo: UserState["user"]) => {
   try {
     if (userInfo?.uid === null || userInfo?.uid === undefined) {
       throw new Error("User ID is null or undefined!");
     } else {
-      await setDoc(doc(db, 'users', userInfo?.uid), userInfo);
+      await setDoc(doc(db, "users", userInfo?.uid), userInfo);
     }
-    console.log('Kullanıcı başarıyla Firestore\'a eklendi!');
+    console.log("User successfully added to firestore!");
   } catch (error) {
-    console.error('Kullanıcı ekleme hatası:', error);
+    console.error("Error when adding user to firestore:", error);
   }
 };
