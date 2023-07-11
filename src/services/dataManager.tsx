@@ -5,10 +5,15 @@ import { headlineNewsEndpoint, newsEndpoint } from "../constants/apiEndpoints";
 
 export const getNews: (
   page: string,
-  language?: string
-) => Promise<Article[]> = async (page, language = "en") => {
+  q?: string,
+  sortBy?: string
+) => Promise<Article[]> = async (
+  page,
+  q = "general",
+  sortBy = "popularity"
+) => {
   const news: Article[] = [];
-  const params = `&page=${page}&pageSize=10&q=general&sortBy=publishedAt&language=${language}`;
+  const params = `&page=${page}&pageSize=10&q=${q}&sortBy=${sortBy}`;
   try {
     await axios.get(`${newsEndpoint}${params}`).then((response) => {
       news.push(...response.data.articles);

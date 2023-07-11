@@ -8,4 +8,5 @@ type RootStackParamList = {
     article: Article;
   };
   Auth: undefined;
+  Filter: undefined;
 };

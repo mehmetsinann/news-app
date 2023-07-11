@@ -18,26 +18,28 @@ type ModalScreenRouteProp = RouteProp<RootStackParamList, "Modal">;
 interface WebViewScreenProps {
   navigation: ModalScreenNavigationProp;
   route: ModalScreenRouteProp;
-};
+}
 
-const WebViewScreen: React.FC<WebViewScreenProps> = ({route,navigation}) => {
+const WebViewScreen: React.FC<WebViewScreenProps> = ({ route, navigation }) => {
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
   };
 
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
-    icon: 'left_arrow'
+    icon: "left_arrow",
   };
 
-  return(
-    <SafeAreaView style={{flex: 1}}>
-      <HeaderBar title={`${route.params.article.title}`} leftButton={headerLeftButton} backgroundColor={primaryColor} />
-      <WebView
-        source={{ uri: route.params.article.url }}
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <HeaderBar
+        title={`${route.params.article.title}`}
+        leftButton={headerLeftButton}
+        backgroundColor={primaryColor}
       />
+      <WebView source={{ uri: route.params.article.url }} />
     </SafeAreaView>
-  )
+  );
 };
 
 export default WebViewScreen;

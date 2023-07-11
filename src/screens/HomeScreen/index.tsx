@@ -13,6 +13,7 @@ import { Icon } from "../../components/Icon";
 import { getHeadlineNews, getNews } from "../../services/dataManager";
 
 import { styles } from "./styles";
+import { lang } from "moment";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -22,19 +23,20 @@ interface HomeScreenProps {
   navigation: HomeScreenNavigationProp;
 }
 
-const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [news, setNews] = useState<Article[]>([]);
   const [topHeadlineNews, setTopHeadlineNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>("1");
-  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState<boolean>(false);
   const scrollViewRef = React.useRef<ScrollView>(null);
+  const options = useSelector((state: RootState) => state.filter.options);
 
   const user = useSelector((state: RootState) => state.user.user);
 
-  const handleScroll = (event:any) => {
+  const handleScroll = (event: any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
-    const threshold = 100; 
+    const threshold = 100;
     if (offsetY >= threshold) {
       setShowScrollToTop(true);
     } else {
@@ -43,49 +45,96 @@ const HomeScreen:React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const scrollToTop = () => {
-    scrollViewRef.current && scrollViewRef.current.scrollTo({ y: 0, animated: true });
+    scrollViewRef.current &&
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
   };
 
   const getAllNews = () => {
     setLoading(true);
-    getNews(currentPage).then((_news) => {
-      setNews([...news, ..._news]);
-      setCurrentPage((parseInt(currentPage) + 1).toString());
-    }).finally(() => {
-      setLoading(false);
-    });
+    getNews(
+      currentPage,
+      options.keyword || undefined,
+      options.orderBy || undefined
+    )
+      .then((_news) => {
+        setNews([...news, ..._news]);
+        setCurrentPage((parseInt(currentPage) + 1).toString());
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
-    getAllNews();   
+    getAllNews();
     getHeadlineNews().then((_topHeadlineNews) => {
       setTopHeadlineNews(_topHeadlineNews);
     });
   }, []);
 
   const headerRightButtonOnPress = () => {
-    if(user) navigation.navigate("Profile");
+    if (user) navigation.navigate("Profile");
     else navigation.navigate("Auth");
   };
 
   const headerRightButton = {
     onPress: headerRightButtonOnPress,
-    icon: user ? 'user' : 'login'
+    icon: user ? "user" : "login",
+  };
+
+  const headerLeftButtonOnPress = () => {
+    navigation.navigate("Filter");
+  };
+
+  const headerLeftButton = {
+    onPress: headerLeftButtonOnPress,
+    icon: "filter",
   };
 
   const goToDetail = (article: Article) => {
-    article.content && article.description ? navigation.navigate("Detail", {article}) : navigation.navigate("Modal", {article});
+    article.content && article.description
+      ? navigation.navigate("Detail", { article })
+      : navigation.navigate("Modal", { article });
   };
 
   return (
     <View style={styles.container}>
-      <HeaderBar title={"Home"} rightButton={headerRightButton} />
-      <ScrollView style={styles.container} ref={scrollViewRef} onScroll={handleScroll} scrollEventThrottle={16}>
-        <Text style={styles.title}>Headline News</Text>
+      <HeaderBar
+        title={"Home"}
+        rightButton={headerRightButton}
+        leftButton={headerLeftButton}
+      />
+      <ScrollView
+        style={styles.container}
+        ref={scrollViewRef}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Headline News</Text>
+          {/* <Text style={styles.options}>
+            {options.keyword ? `Keyword: ${options.keyword}` : ""}
+          </Text> */}
+        </View>
         <NewsSlider articles={topHeadlineNews} onPressItem={goToDetail} />
-        <View style={{width: "93%", height: 2, backgroundColor: 'lightgrey', alignSelf: 'center' }} />
-        <Text style={styles.title}>News</Text>
-        <NewsContainer articles={news} onPressItem={goToDetail} loading={loading} getAllNews={getAllNews} />
+        <View
+          style={{
+            width: "93%",
+            height: 2,
+            backgroundColor: "lightgrey",
+            alignSelf: "center",
+          }}
+        />
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>News</Text>
+          <Text style={styles.keyword}>{`${options.keyword}`}</Text>
+        </View>
+        <NewsContainer
+          articles={news}
+          onPressItem={goToDetail}
+          loading={loading}
+          getAllNews={getAllNews}
+        />
       </ScrollView>
       {showScrollToTop ? (
         <TouchableOpacity onPress={scrollToTop} style={styles.goToTopButton}>

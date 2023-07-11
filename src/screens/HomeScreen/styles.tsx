@@ -6,17 +6,26 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   goToTopButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     right: 20,
     padding: 12,
-    backgroundColor:'black',
+    backgroundColor: "black",
     borderRadius: 100,
-    opacity: 0.7
+    opacity: 0.7,
   },
   title: {
-    marginLeft: 16,
     fontSize: 20,
-    marginTop: 12
+  },
+  titleContainer: {
+    marginVertical: 12,
+    marginHorizontal: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  keyword: {
+    fontSize: 14,
+    color: "grey",
   },
 });

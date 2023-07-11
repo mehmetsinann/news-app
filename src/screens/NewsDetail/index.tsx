@@ -76,8 +76,6 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
     navigation.navigate("Modal", { article: route.params.article });
   };
 
-  console.log(route.params.article);
-
   const showSavedToast: () => void = () => {
     Toast.show({
       type: "success",
