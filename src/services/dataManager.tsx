@@ -1,5 +1,3 @@
-// News API Key: 44153d692eda497496f8eb010a2de0a6
-
 import axios from "axios";
 import { headlineNewsEndpoint, newsEndpoint } from "../constants/apiEndpoints";
 

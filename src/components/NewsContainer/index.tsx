@@ -20,12 +20,10 @@ export const NewsContainer: React.FC<NewsContainerProps> = ({
 }) => {
   const renderFooter = () => {
     return (
-      //Footer View with Load More button
       <View style={styles.footer}>
         <TouchableOpacity
           activeOpacity={0.9}
           onPress={getAllNews}
-          //On Click of button calling getData function to load more data
           style={styles.loadMoreBtn}
         >
           {loading ? (
