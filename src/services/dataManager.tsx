@@ -10,10 +10,10 @@ export const getNews: (
 ) => Promise<Article[]> = async (
   page,
   q = "general",
-  sortBy = "popularity"
+  sortBy = "publishedAt"
 ) => {
   const news: Article[] = [];
-  const params = `&page=${page}&pageSize=10&q=${q}&sortBy=${sortBy}`;
+  const params = `&page=${page}&pageSize=10&q=${q}&sortBy=${sortBy}&language=en`;
   try {
     await axios.get(`${newsEndpoint}${params}`).then((response) => {
       news.push(...response.data.articles);
