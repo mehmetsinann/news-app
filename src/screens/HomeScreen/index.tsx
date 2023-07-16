@@ -13,7 +13,6 @@ import { Icon } from "../../components/Icon";
 import { getHeadlineNews, getNews } from "../../services/dataManager";
 
 import { styles } from "./styles";
-import { lang } from "moment";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

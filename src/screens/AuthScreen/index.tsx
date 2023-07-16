@@ -21,10 +21,16 @@ import { setUser } from "../../redux/slices/userSlice";
 
 import { styles } from "./styles";
 import { getSavedNewsData } from "../../firebase/newsMethods";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-interface AuthScreenProps {
-  navigation: any;
-}
+type FilterScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Auth"
+>;
+
+type AuthScreenProps = {
+  navigation: FilterScreenNavigationProp;
+};
 
 const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
   const [name, setName] = useState<string>("");
