@@ -8,15 +8,16 @@ import { styles } from "./styles";
 interface NewCardProps {
   article: Article;
   onPress: () => void;
+  testID?: string;
 }
 
 export const NewCard: React.FC<NewCardProps> = React.memo(
-  ({ article, onPress }) => {
+  ({ article, onPress, testID = "new-card" }) => {
     const publishDate = moment(article.publishedAt).format(
       "DD MMMM YYYY - HH:mm"
     );
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
+      <TouchableWithoutFeedback onPress={onPress} testID={testID}>
         <View style={styles.container}>
           <Image source={{ uri: article?.urlToImage }} style={styles.bgImage} />
           <View style={styles.contentContainer}>

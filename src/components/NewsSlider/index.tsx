@@ -1,38 +1,50 @@
-import React from 'react';
-import { View } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import React from "react";
+import { View } from "react-native";
+import Carousel from "react-native-snap-carousel";
 
-import { NewCard } from '../NewCard';
+import { NewCard } from "../NewCard";
 
-import { screenWidth } from '../../constants/screenDimensions';
+import { screenWidth } from "../../constants/screenDimensions";
 
-import { styles } from './styles';
+import { styles } from "./styles";
 
 interface TopHeadlineSliderProps {
   articles: Article[];
   onPressItem: (item: Article) => void;
 }
 
-export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({ articles, onPressItem }) => {
+export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({
+  articles,
+  onPressItem,
+}) => {
   const carouselRef = React.useRef(null);
 
-  const renderItem: (item: Article, index: number) => JSX.Element = (item:Article,index:number) => {
-    return(
-      <NewCard article={item} key={index} onPress={() => {onPressItem(item)}} />
-    )
-  }
+  const renderItem: (item: Article, index: number) => JSX.Element = (
+    item: Article,
+    index: number
+  ) => {
+    return (
+      <NewCard
+        article={item}
+        key={index}
+        onPress={() => {
+          onPressItem(item);
+        }}
+        testID={`new-card-${index}`}
+      />
+    );
+  };
 
-  return(
-    <View style={styles.container}>
+  return (
+    <View style={styles.container} testID="news-slider">
       <Carousel
         ref={carouselRef}
         data={articles}
-        renderItem={
-          ({item, index}) => renderItem(item, index)
-        }
+        renderItem={({ item, index }) => renderItem(item, index)}
         sliderWidth={screenWidth}
-        itemWidth={screenWidth-40}
+        itemWidth={screenWidth - 40}
+        testID="carousel-component"
       />
     </View>
-  )
-}
+  );
+};

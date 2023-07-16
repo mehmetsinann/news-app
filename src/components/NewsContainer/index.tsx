@@ -25,9 +25,14 @@ export const NewsContainer: React.FC<NewsContainerProps> = ({
           activeOpacity={0.9}
           onPress={getAllNews}
           style={styles.loadMoreBtn}
+          testID="load-more-button"
         >
           {loading ? (
-            <ActivityIndicator color="black" style={{ alignSelf: "center" }} />
+            <ActivityIndicator
+              color="black"
+              style={{ alignSelf: "center" }}
+              testID="loading-indicator"
+            />
           ) : (
             <Text style={styles.btnText}>Load More</Text>
           )}
@@ -44,6 +49,7 @@ export const NewsContainer: React.FC<NewsContainerProps> = ({
           onPress={() => {
             onPressItem(article);
           }}
+          testID="new-card"
         />
       ))}
       {renderFooter()}
