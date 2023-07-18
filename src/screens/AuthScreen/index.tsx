@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -152,6 +153,13 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
       style={styles.container}
     >
       <SafeAreaView style={styles.container}>
+        <View style={styles.iconContainer}>
+          <Image
+            source={require("../../../assets/icon.png")}
+            style={styles.icon}
+          />
+          <Text style={styles.iconText}>DailyBrief</Text>
+        </View>
         {isLogin ? loginContainer() : registerContainer()}
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           {loading ? (
