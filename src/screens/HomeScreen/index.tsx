@@ -99,7 +99,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <HeaderBar
-        title={"Home"}
+        title={"DailyBrief"}
         rightButton={headerRightButton}
         leftButton={headerLeftButton}
       />
@@ -111,9 +111,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       >
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Headline News</Text>
-          {/* <Text style={styles.options}>
-            {options.keyword ? `Keyword: ${options.keyword}` : ""}
-          </Text> */}
         </View>
         <NewsSlider articles={topHeadlineNews} onPressItem={goToDetail} />
         <View

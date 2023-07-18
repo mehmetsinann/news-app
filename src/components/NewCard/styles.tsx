@@ -5,12 +5,12 @@ import { backgroundColor, secondaryColor } from "../../constants/appColors";
 export const styles = StyleSheet.create({
   container: {
     width: screenWidth - 40,
-    height: screenHeight * 0.4,
+    height: screenHeight * (screenHeight > 800 ? 0.45 : 0.55),
     borderRadius: 8,
-    alignSelf:'center',
+    alignSelf: "center",
     marginVertical: 8,
     borderWidth: 1,
-    borderColor: 'lightgrey',
+    borderColor: "lightgrey",
   },
   contentContainer: {
     flex: 1,
@@ -19,12 +19,13 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 8,
     padding: 8,
     height: "40%",
+    justifyContent: "space-around",
   },
   articleTitle: {
     fontSize: 20,
     fontWeight: "500",
     color: "black",
-    marginVertical: 4
+    marginVertical: 4,
   },
   articleDescription: {
     fontSize: 16,
@@ -40,5 +41,5 @@ export const styles = StyleSheet.create({
   publishDate: {
     fontSize: 14,
     color: "gray",
-  }
+  },
 });

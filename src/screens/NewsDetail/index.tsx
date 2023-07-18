@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RouteProp } from "@react-navigation/native";
@@ -117,13 +117,13 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View>
+    <>
       <HeaderBar
         title={route.params.article.title}
         leftButton={headerLeftButton}
         rightButton={user ? headerRightButton : null}
       />
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.publishedAt}>{publishDate}</Text>
@@ -140,8 +140,8 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
         <TouchableOpacity onPress={goToNew} style={styles.goToNewButton}>
           <Text>Go to New</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+      </ScrollView>
+    </>
   );
 };
 
