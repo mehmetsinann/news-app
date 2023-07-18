@@ -12,8 +12,14 @@ export const styles = StyleSheet.create({
     width: screenWidth - 80,
     alignSelf: "center",
   },
-  iconContainer: { alignItems: "center", marginBottom: 24 },
-  iconText: { fontSize: 16, fontWeight: "500" },
+  iconContainer: {
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  iconText: {
+    fontSize: 20,
+    fontWeight: "500",
+  },
   icon: {
     width: 72,
     height: 72,
