@@ -44,6 +44,10 @@ export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({
         sliderWidth={screenWidth}
         itemWidth={screenWidth - 40}
         testID="carousel-component"
+        autoplay={true}
+        loop={true}
+        autoplayInterval={5000}
+        autoplayDelay={1500}
       />
     </View>
   );
