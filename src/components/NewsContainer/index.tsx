@@ -1,5 +1,11 @@
 import React from "react";
-import { ActivityIndicator, TouchableOpacity, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  Text,
+  View,
+  FlatList,
+} from "react-native";
 
 import { NewCard } from "../NewCard";
 
@@ -42,14 +48,14 @@ export const NewsContainer: React.FC<NewsContainerProps> = ({
   };
   return (
     <View>
-      {articles.map((article: Article, index: number) => (
+      {articles.map((article, index) => (
         <NewCard
           article={article}
           key={index}
           onPress={() => {
             onPressItem(article);
           }}
-          testID="new-card"
+          testID={`new-card-${index}`}
         />
       ))}
       {renderFooter()}

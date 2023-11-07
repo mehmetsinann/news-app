@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { AppRegistry, StyleSheet, Text, View } from "react-native";
 import Navigation from "./src/navigation/Navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -7,6 +7,7 @@ import store from "./src/redux/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useCallback, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import { registerRootComponent } from "expo";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,6 +48,8 @@ export default function App() {
     </Provider>
   );
 }
+
+AppRegistry.registerComponent("main", () => App);
 
 const styles = StyleSheet.create({
   container: {

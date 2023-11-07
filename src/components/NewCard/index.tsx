@@ -11,31 +11,34 @@ interface NewCardProps {
   testID?: string;
 }
 
-export const NewCard: React.FC<NewCardProps> = React.memo(
-  ({ article, onPress, testID = "new-card" }) => {
-    const publishDate = moment(article.publishedAt).format(
-      "DD MMMM YYYY - HH:mm"
-    );
-    return (
-      <TouchableWithoutFeedback onPress={onPress} testID={testID}>
-        <View style={styles.container}>
-          <Image source={{ uri: article?.urlToImage }} style={styles.bgImage} />
-          <View style={styles.contentContainer}>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text style={styles.publishDate}>{publishDate}</Text>
-              <Text style={styles.publishDate}>{article.source.name}</Text>
-            </View>
-            <Text style={styles.articleTitle} numberOfLines={2}>
-              {article.title}
-            </Text>
-            <Text style={styles.articleDescription} numberOfLines={3}>
-              {article.description}
-            </Text>
+export const NewCard: React.FC<NewCardProps> = ({
+  article,
+  onPress,
+  testID = "new-card",
+}) => {
+  const publishDate = moment(article.publishedAt).format(
+    "DD MMMM YYYY - HH:mm"
+  );
+
+  return (
+    <TouchableWithoutFeedback onPress={onPress} testID={testID}>
+      <View style={styles.container}>
+        <Image source={{ uri: article?.urlToImage }} style={styles.bgImage} />
+        <View style={styles.contentContainer}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.publishDate}>{publishDate}</Text>
+            <Text style={styles.publishDate}>{article.source.name}</Text>
           </View>
+          <Text style={styles.articleTitle} numberOfLines={2}>
+            {article.title}
+          </Text>
+          <Text style={styles.articleDescription} numberOfLines={3}>
+            {article.description}
+          </Text>
         </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-);
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};

@@ -11,18 +11,18 @@ import {
   Image,
 } from "react-native";
 import { useDispatch } from "react-redux";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import {
   addUserToFirestore,
   login,
   register,
 } from "../../firebase/authMethods";
+import { getSavedNewsData } from "../../firebase/newsMethods";
 
 import { setUser } from "../../redux/slices/userSlice";
 
 import { styles } from "./styles";
-import { getSavedNewsData } from "../../firebase/newsMethods";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type FilterScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

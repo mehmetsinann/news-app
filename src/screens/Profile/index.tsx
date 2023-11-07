@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -10,11 +10,10 @@ import { getSavedNewsData } from "../../firebase/newsMethods";
 
 import { removeUser } from "../../redux/slices/userSlice";
 
-import { HeaderBar } from "../../components/HeaderBar"
+import { HeaderBar } from "../../components/HeaderBar";
 import { NewsSlider } from "../../components/NewsSlider";
 
 import { styles } from "./styles";
-
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -32,12 +31,12 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
 
   const headerLeftButtonOnPress = () => {
     navigation.goBack();
-  }
+  };
 
   const headerLeftButton = {
     onPress: headerLeftButtonOnPress,
-    icon: 'left_arrow'
-  }
+    icon: "left_arrow",
+  };
 
   const handleLogout = async () => {
     setLoading(true);
@@ -45,34 +44,42 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
       dispatch(removeUser());
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Home' }],
-      })
+        routes: [{ name: "Home" }],
+      });
     });
     setLoading(false);
   };
 
   const handleNewsItemPress = (article: Article) => {
-    navigation.navigate('Detail', { article });
+    navigation.navigate("Detail", { article });
   };
 
-  return(
+  return (
     <View style={styles.container}>
       <HeaderBar title={"Profile"} leftButton={headerLeftButton} />
       <Text style={styles.name}>{user?.displayName}</Text>
       <Text style={styles.email}>{user?.email}</Text>
       <View style={styles.newsContainer}>
         <Text style={styles.newsTitle}>Saved News ({savedNews?.length})</Text>
-        {
-          savedNews.length > 0 ? <NewsSlider articles={savedNews} onPressItem={handleNewsItemPress} /> : <Text style={styles.noNews}>There is no saved news</Text>
-        }
+        {savedNews.length > 0 ? (
+          <NewsSlider
+            loading={false}
+            articles={savedNews}
+            onPressItem={handleNewsItemPress}
+          />
+        ) : (
+          <Text style={styles.noNews}>There is no saved news</Text>
+        )}
       </View>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        {
-          loading ? <ActivityIndicator color={'red'} size={"small"} /> : <Text style={{color:'red'}}>Logout</Text>
-        }
+        {loading ? (
+          <ActivityIndicator color={"red"} size={"small"} />
+        ) : (
+          <Text style={{ color: "red" }}>Logout</Text>
+        )}
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 export default Profile;

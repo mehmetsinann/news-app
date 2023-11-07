@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth, db } from "./firebaseConfig";
+import { auth, db } from "./firebase.config";
 import { doc, setDoc } from "firebase/firestore";
 
 export const register: (

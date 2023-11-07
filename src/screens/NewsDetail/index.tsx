@@ -135,10 +135,11 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ navigation, route }) => {
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.content}>{content.split("[")[0]}</Text>
         <Text style={styles.readMore}>
-          Click the 'Go to New' button below to read the rest of the new
+          Click the 'Read More' button below to read the rest of the new from
+          original source
         </Text>
         <TouchableOpacity onPress={goToNew} style={styles.goToNewButton}>
-          <Text>Go to New</Text>
+          <Text>Read More</Text>
         </TouchableOpacity>
       </ScrollView>
     </>

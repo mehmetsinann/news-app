@@ -1,6 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import Carousel from "react-native-snap-carousel";
+import { ActivityIndicator, View } from "react-native";
+import Carousel from "react-native-snap-carousel-v4";
 
 import { NewCard } from "../NewCard";
 
@@ -10,11 +10,13 @@ import { styles } from "./styles";
 
 interface TopHeadlineSliderProps {
   articles: Article[];
+  loading: boolean;
   onPressItem: (item: Article) => void;
 }
 
 export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({
   articles,
+  loading,
   onPressItem,
 }) => {
   const carouselRef = React.useRef(null);
@@ -37,18 +39,25 @@ export const NewsSlider: React.FC<TopHeadlineSliderProps> = ({
 
   return (
     <View style={styles.container} testID="news-slider">
-      <Carousel
-        ref={carouselRef}
-        data={articles}
-        renderItem={({ item, index }) => renderItem(item, index)}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth - 40}
-        testID="carousel-component"
-        autoplay={true}
-        loop={true}
-        autoplayInterval={5000}
-        autoplayDelay={1500}
-      />
+      {loading ? (
+        <ActivityIndicator
+          color="black"
+          style={{ alignSelf: "center" }}
+          testID="loading-indicator"
+        />
+      ) : (
+        <Carousel
+          ref={carouselRef}
+          data={articles}
+          renderItem={({ item, index }: { item: Article; index: number }) =>
+            renderItem(item, index)
+          }
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth - 40}
+          vertical={false}
+          autoplay={true}
+        />
+      )}
     </View>
   );
 };

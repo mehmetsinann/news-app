@@ -64,11 +64,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       });
   };
 
+  const getHeadline = () => {
+    setLoading(true);
+    getHeadlineNews()
+      .then((_topHeadlineNews) => {
+        setTopHeadlineNews(_topHeadlineNews);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     getAllNews();
-    getHeadlineNews().then((_topHeadlineNews) => {
-      setTopHeadlineNews(_topHeadlineNews);
-    });
+    getHeadline();
   }, []);
 
   const headerRightButtonOnPress = () => {
@@ -112,7 +121,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Headline News</Text>
         </View>
-        <NewsSlider articles={topHeadlineNews} onPressItem={goToDetail} />
+        <NewsSlider
+          articles={topHeadlineNews}
+          loading={loading}
+          onPressItem={goToDetail}
+        />
         <View
           style={{
             width: "93%",
@@ -125,12 +138,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <Text style={styles.title}>News</Text>
           <Text style={styles.keyword}>{`${options.keyword}`}</Text>
         </View>
-        <NewsContainer
-          articles={news}
-          onPressItem={goToDetail}
-          loading={loading}
-          getAllNews={getAllNews}
-        />
+        <View>
+          <NewsContainer
+            articles={news}
+            onPressItem={goToDetail}
+            loading={loading}
+            getAllNews={getAllNews}
+          />
+        </View>
       </ScrollView>
       {showScrollToTop ? (
         <TouchableOpacity onPress={scrollToTop} style={styles.goToTopButton}>
