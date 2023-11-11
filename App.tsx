@@ -7,7 +7,6 @@ import store from "./src/redux/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { useCallback, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { registerRootComponent } from "expo";
 
 SplashScreen.preventAutoHideAsync();
 
