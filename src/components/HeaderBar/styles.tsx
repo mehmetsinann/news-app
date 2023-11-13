@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 import { screenHeight } from "../../constants/screenDimensions";
 import { secondaryColor } from "../../constants/appColors";
 
@@ -7,10 +7,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     top: 0,
     width: "100%",
-    height: screenHeight * 0.11,
+    height: Platform.OS === "ios" ? screenHeight * 0.11 : screenHeight * 0.08,
     backgroundColor: secondaryColor,
     alignItems: "center",
     justifyContent: "space-between",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   headerTitle: {
     color: "white",

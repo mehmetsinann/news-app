@@ -40,7 +40,11 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
         )}
       </View>
 
-      <Text style={[styles.headerTitle]} testID="header-title">
+      <Text
+        style={[styles.headerTitle]}
+        testID="header-title"
+        numberOfLines={1}
+      >
         {title}
       </Text>
 
