@@ -178,6 +178,14 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{ marginTop: 10, alignItems: "center" }}
+        >
+          <Text>Continue without login</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
