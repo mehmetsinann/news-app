@@ -2,7 +2,7 @@
   "expo": {
     "name": "DailyBrief",
     "slug": "daily_brief",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mehmetsinann.daily_brief"
+      "package": "com.mehmetsinann.daily_brief",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
