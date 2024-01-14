@@ -37,7 +37,10 @@ const WebViewScreen: React.FC<WebViewScreenProps> = ({ route, navigation }) => {
         leftButton={headerLeftButton}
         backgroundColor={primaryColor}
       />
-      <WebView source={{ uri: route.params.article.url }} />
+      <WebView
+        source={{ uri: route.params.article.url }}
+        originWhitelist={["*"]}
+      />
     </SafeAreaView>
   );
 };
