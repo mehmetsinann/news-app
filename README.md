@@ -1,6 +1,6 @@
 # News App
 
-In this application, users can read the news from their original sources, log in and save the news they want to read later.
+In this application, users can read the news from their original sources, log in and save the news they want to read later. <br /> [Watch Demo](https://drive.google.com/file/d/1j-gXXtCJHGlmjYFMQDTHdTG9mk_ivTTu/view?usp=share_link)
 
 ## Features
 
